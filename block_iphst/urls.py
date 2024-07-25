@@ -4,7 +4,7 @@ from netbox.views.generic import ObjectChangeLogView
 from . import  views
 
 
-urlpatterns = (
-    path('', views.BlockIP.as_view(), name='BlockIp')
-)
+urlpatterns = [
+    path('', views.BlockIP.as_view(), name='BlockIp'),
+]
 
