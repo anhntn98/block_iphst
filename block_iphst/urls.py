@@ -5,6 +5,6 @@ from . import  views
 
 
 urlpatterns = (
-    path('', views.BlockIP.as_view(), name='BlockIP')
+    path('', views.BlockIP.as_view(), name='BlockIp')
 )
 
