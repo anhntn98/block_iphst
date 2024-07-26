@@ -1,3 +1,4 @@
+MANIFEST.in
 README.md
 setup.py
 block_iphst/__init__.py
@@ -9,3 +10,5 @@ block_iphst.egg-info/SOURCES.txt
 block_iphst.egg-info/dependency_links.txt
 block_iphst.egg-info/not-zip-safe
 block_iphst.egg-info/top_level.txt
+block_iphst/templates/block_iphst/blockip.html
+block_iphst/templates/block_iphst/netbox_access_lists/accesslistrule.html
