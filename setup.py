@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='block_iphst',
-    version='0.3.2',
+    version='0.3.3',
     description='Block IP zone hosting',
     install_requires=[],
     packages=find_packages(),
