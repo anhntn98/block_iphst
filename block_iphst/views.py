@@ -43,9 +43,26 @@ class Add_Block(View):
         prefix=check_ip_in_prefix(ip)
         if prefix:
             for de in gw:
-                with Device(de) as dev:
-                    with Config(dev, mode='private') as conf_dev:
-                        commit_cmd = f'set interfaces ae10 unit 0 family inet address {prefix} arp {ip} mac 00:01:00:02:00:03'
+                try:
+                    with Device(de) as dev:
+                        with Config(dev, mode='private') as conf_dev:
+                            commit_cmd = f'set interfaces ae10 unit 0 family inet address {prefix} arp {ip} mac 00:01:00:02:00:03'
+                            try:
+                                conf_dev.load(commit_cmd, format='set')
+                                conf_dev.commit(comment='Block IP')
+                            except:
+                                msg="Cannot block IP in gw {}".format(de)
+                except:
+                    msg="Cannot connect to gw {}".format(de)
+    template_name = 'block_iphst/blockip.html'
+    return render(
+        request,
+        self.template_name,
+        {"message":msg}
+    )
+                
+                
+                
                         
                         
             
