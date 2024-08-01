@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-from ipam.models import Prefix
+from ipam.models import Prefix, IPAddress
 import ipaddress
 import .configuration
 # Juniper
@@ -50,6 +50,12 @@ class Add_Block(View):
                             try:
                                 conf_dev.load(commit_cmd, format='set')
                                 conf_dev.commit(comment='Block IP')
+                                ipadd=str(ip) + "/24"
+                                ipaddr=IPAdrress.objects.getorcreate(address=ip)
+                                ipaddr.snapshot()
+                                ipaddr.status="disable"
+                                ipaddr.comments="IP chua duoc dang ky ma da su dung. Block"                                             
+                                    
                             except:
                                 msg="Cannot block IP in gw {}".format(de)
                 except:
