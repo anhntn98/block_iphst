@@ -34,10 +34,10 @@ class BlockIP(View):
 class Add_Block(View):
     template_name = 'block_iphst/blockip.html'
     def get(self, request):
-    return render(
-        request,
-        self.template_name
-    )
+        return render(
+            request,
+            self.template_name
+        )
     def post(self,request):
         ip=request.POST.get("IP","")
         prefix=check_ip_in_prefix(ip)
