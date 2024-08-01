@@ -54,12 +54,14 @@ class Add_Block(View):
                                 msg="Cannot block IP in gw {}".format(de)
                 except:
                     msg="Cannot connect to gw {}".format(de)
-    template_name = 'block_iphst/blockip.html'
-    return render(
-        request,
-        self.template_name,
-        {"message":msg}
-    )
+        else:
+            msg="IP invalid."
+        template_name = 'block_iphst/blockip.html'
+        return render(
+            request,
+            self.template_name,
+            {"message":msg}
+        )
                 
                 
                 
