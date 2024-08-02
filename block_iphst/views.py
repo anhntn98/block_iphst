@@ -8,7 +8,7 @@ from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
 from django.contrib import messages
 from django.shortcuts import redirect
-
+from django.urls import reverse
 
 
 def check_ip_in_prefix(ip):
