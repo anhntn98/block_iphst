@@ -4,12 +4,12 @@ BLOCK IP HST ZONE
 {% endblock %}
 {% block layout %}
 <h2>BLOCK IP</h2>
-<form action="{% url 'block_iphst:block_iphst:add' %}">
+<form action="{% url 'add' %}">
   <input type="text" id="IP" name="IP">
   <input type="submit" value="Block">
 </form>
 <h2>REMOVE BLOCK ip</h2>
-<form action="{% url 'block_iphst:block_iphst:remove' %}">
+<form action="{% url 'block_iphst:remove' %}">
   <input type="text" id="rm_IP" name="rm_IP">
   <input type="submit" value="Remove">
 </form>
