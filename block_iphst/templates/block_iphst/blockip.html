@@ -8,6 +8,14 @@ BLOCK IP HST ZONE
   <input type="text" id="IP" name="IP">
   <input type="submit" value="Block">
 </form>
+<div><br><br><br></div>
+{% if messages %}
+{% for message in messages %}
+<div role="alert" style="color:red">
+{{ message }}
+</div>
+{% endfor %}
+{% endif %}
 <h2>REMOVE BLOCK ip</h2>
 <form action="remove/">
   <input type="text" id="rm_IP" name="rm_IP">
