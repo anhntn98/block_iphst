@@ -67,7 +67,7 @@ class Remove_Block(View):
     def get(self, request):
         return redirect(reverse('plugins:block_iphst:BlockIp'))
     def post(self,request):
-        ip=request.POST.get("IP","")
+        ip=request.POST.get("rm_IP","")
         prefix=check_ip_in_prefix(ip)
         if prefix:
             for de in settings.gw:
