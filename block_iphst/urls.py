@@ -5,8 +5,8 @@ from . import  views
 
 
 urlpatterns = [
-    path('add/', views.add.as_view(),name='add'),
-    path('remove/', views.remove.as_view(),name='remove'),
+    path('add/', views.Add_Block.as_view(),name='add'),
+    path('remove/', views.Remove_Block.as_view(),name='remove'),
     path('', views.BlockIP.as_view(), name='BlockIp'),
 ]
 
