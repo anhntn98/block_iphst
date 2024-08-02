@@ -68,8 +68,9 @@ class Add_Block(View):
             self.template_name,
             {"message":msg}
         )
-                
-                
+
+class Remove_Block(View):
+    pass                
                 
                         
                         
