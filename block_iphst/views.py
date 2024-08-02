@@ -6,6 +6,9 @@ from adsl2nb import settings
 # Juniper
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
+from django.contrib import messages
+from django.shortcuts import redirect
+
 
 
 def check_ip_in_prefix(ip):
@@ -57,18 +60,14 @@ class Add_Block(View):
                                 ipaddr.comments="IP chua duoc dang ky ma da su dung. Block"                                             
                                     
                             except:
-                                msg="Cannot block IP in gw {}".format(de)
+                                messages.success(request, "Cannot block IP in gw {}".format(de))
+                                return redirect('my_redirect_view')
                 except:
-                    msg="Cannot connect to gw {}".format(de)
+                    messages.success(request, "Cannot block IP in gw {}".format(de))
+                    return redirect('my_redirect_view')   
         else:
-            msg="IP invalid."
-        template_name = 'block_iphst/blockip.html'
-        request.path="/block_iphst/"
-        return render(
-            request,
-            self.template_name,
-            {"message":msg}
-        )
+            messages.success(request, 'IP invalid.')
+            return redirect('my_redirect_view')
 
 class Remove_Block(View):
     pass                
