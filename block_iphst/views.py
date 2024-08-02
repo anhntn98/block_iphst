@@ -61,13 +61,13 @@ class Add_Block(View):
                                     
                             except:
                                 messages.success(request, "Cannot block IP in gw {}".format(de))
-                                return redirect('my_redirect_view')
+                                return redirect('BlockIP')
                 except:
                     messages.success(request, "Cannot block IP in gw {}".format(de))
-                    return redirect('my_redirect_view')   
+                    return redirect('BlockIP')   
         else:
             messages.success(request, 'IP invalid.')
-            return redirect('my_redirect_view')
+            return redirect('BlockIP')
 
 class Remove_Block(View):
     pass                
