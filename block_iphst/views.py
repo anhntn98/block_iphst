@@ -57,14 +57,30 @@ class Add_Block(View):
                                 messages.success(request, "Cannot block IP in gw {}".format(de))
                                 return redirect(reverse('plugins:block_iphst:BlockIp'))
                 except:
-                    messages.success(request, "Cannot block IP in gw {}".format(de))
+                    messages.success(request, "Cannot connect to gw {}".format(de))
                     return redirect(reverse('plugins:block_iphst:BlockIp'))   
         else:
             messages.success(request, 'IP invalid.')
             return redirect(reverse('plugins:block_iphst:BlockIp'))
 
 class Remove_Block(View):
-    pass                
+    def get(self, request):
+        return redirect(reverse('plugins:block_iphst:BlockIp'))
+    def post(self,request):
+        ip=request.POST.get("IP","")
+        prefix=check_ip_in_prefix(ip)
+        if prefix:
+            for de in settings.gw:
+                ipadd=str(ip) + "/24"
+                ipaddr=IPAdrress.objects.getorcreate(address=ip)
+                ipaddr.snapshot()
+                ipaddr.status="disable"
+                ipaddr.comments="IP chua duoc dang ky ma da su dung. Block"                                                            
+                messages.success(request, "Cannot connect to gw {}".format(de))
+                return redirect(reverse('plugins:block_iphst:BlockIp'))   
+        else:
+            messages.success(request, 'IP invalid.')
+            return redirect(reverse('plugins:block_iphst:BlockIp'))               
                 
                         
                         
