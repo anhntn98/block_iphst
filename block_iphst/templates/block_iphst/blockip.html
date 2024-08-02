@@ -4,7 +4,7 @@ BLOCK IP HST ZONE
 {% endblock %}
 {% block content %}
 <h2>BLOCK IP</h2>
-<form action="add/">
+<form action="add/" method="post">
   <input type="text" id="IP" name="IP">
   <input type="submit" value="Block">
 </form>
@@ -17,7 +17,7 @@ BLOCK IP HST ZONE
 {% endfor %}
 {% endif %}
 <h2>REMOVE BLOCK ip</h2>
-<form action="remove/">
+<form action="remove/" method="post">
   <input type="text" id="rm_IP" name="rm_IP">
   <input type="submit" value="Remove">
 </form>
