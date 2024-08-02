@@ -63,6 +63,7 @@ class Add_Block(View):
         else:
             msg="IP invalid."
         template_name = 'block_iphst/blockip.html'
+        request.path="/block_iphst/"
         return render(
             request,
             self.template_name,
