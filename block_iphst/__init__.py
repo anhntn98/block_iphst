@@ -5,7 +5,7 @@ class BlockIpHstConfig(PluginConfig):
     name = 'block_iphst'
     verbose_name = ' Block IP zone HST'
     description = ''
-    version = '0.3.9'
+    version = '0.3.10'
 
 
 config = BlockIpHstConfig
