@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.views import View
 from ipam.models import Prefix, IPAddress
 import ipaddress
-import .configuration
+from adsl2nb import settings
 # Juniper
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
-from jnpr.junos.exception import ConnectError, ConfigLoadError, CommitError, ConnectAuthError, RpcTimeoutError
+
 
 def check_ip_in_prefix(ip):
     try:
@@ -42,7 +42,7 @@ class Add_Block(View):
         ip=request.POST.get("IP","")
         prefix=check_ip_in_prefix(ip)
         if prefix:
-            for de in gw:
+            for de in settings.gw:
                 try:
                     with Device(de) as dev:
                         with Config(dev, mode='private') as conf_dev:
