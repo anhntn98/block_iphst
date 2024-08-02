@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from ipam.models import Prefix, IPAddress
 import ipaddress
-from adsl2nb import settings
+from . import settings
 # Juniper
 from jnpr.junos import Device
 from jnpr.junos.utils.config import Config
@@ -21,10 +21,7 @@ def check_ip_in_prefix(ip):
     ipaddress.ip_network('202.151.168.0/24'),
     ipaddress.ip_network('210.86.239.0/24')
     ]
-    for network in networks:
-        if ip in network:
-            return network
-    return False
+    return next((network for network in networks if ip in network), False)
 
 class BlockIP(View):
     template_name = 'block_iphst/blockip.html'
