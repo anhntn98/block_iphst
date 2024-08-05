@@ -74,7 +74,7 @@ class Remove_Block(View):
             for de in settings.gw:
                 ipadd=str(ip) + "/24"
                 try:
-                    ipaddr,check=IPAddress.objects.get(address=ip)
+                    ipaddr=IPAddress.objects.get(address=ip)
                     ipaddr.snapshot() 
                     ipaddr.delete()
                 except:
