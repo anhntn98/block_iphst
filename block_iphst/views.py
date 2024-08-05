@@ -73,11 +73,12 @@ class Remove_Block(View):
         if prefix:
             for de in settings.gw:
                 ipadd=str(ip) + "/24"
-                ipaddr,check=IPAddress.objects.get_or_create(address=ip)
-                ipaddr.snapshot()
-                ipaddr.status="disable"
-                ipaddr.comments="IP chua duoc dang ky ma da su dung. Block"     
-                ipaddr.save()
+                try:
+                    ipaddr,check=IPAddress.objects.get(address=ip)
+                    ipaddr.snapshot() 
+                    ipaddr.delete()
+                except:
+                    pass
                 messages.success(request, "Cannot connect to gw {}".format(de))
                 return redirect(reverse('plugins:block_iphst:BlockIp'))   
         else:
