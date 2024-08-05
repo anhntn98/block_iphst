@@ -72,17 +72,29 @@ class Remove_Block(View):
         prefix=check_ip_in_prefix(ip)
         if prefix:
             for de in settings.gw:
-                ipadd=str(ip) + "/24"
                 try:
-                    ipaddr=IPAddress.objects.get(address=ipadd)
-                    ipaddr.snapshot() 
-                    ipaddr.delete()
-                    messages.success(request, "Da xoa IP {} thanh cong.".format(ipaddr))
+                    with Device(de) as dev:
+                        with Config(dev, mode='private') as conf_dev:
+                            commit_cmd = f'set interfaces ae10 unit 0 family inet address {prefix} arp {ip} mac 00:01:00:02:00:03'
+                            try:
+                                conf_dev.load(commit_cmd, format='set')
+                                conf_dev.commit(comment='Block IP')
+                                ipadd=str(ip) + "/24"
+                                try:
+                                    ipaddr=IPAddress.objects.get(address=ipadd)
+                                    ipaddr.snapshot() 
+                                    ipaddr.delete()
+                                    messages.success(request, "Da xoa IP {} thanh cong.".format(ipaddr))
+                                    return redirect(reverse('plugins:block_iphst:BlockIp'))   
+                                except:
+                                    pass
+                            except:
+                                messages.success(request, "Cannot block IP in gw {}".format(de))
+                                return redirect(reverse('plugins:block_iphst:BlockIp'))
+                except:
+                    messages.success(request, "Cannot connect to gw {}".format(de))
                     return redirect(reverse('plugins:block_iphst:BlockIp'))   
-                except Exception as e:
-                    messages.success(request, e)
-                    return redirect(reverse('plugins:block_iphst:BlockIp'))   
-
+                            
         else:
             messages.success(request, 'IP invalid.')
             return redirect(reverse('plugins:block_iphst:BlockIp'))               
