@@ -77,10 +77,10 @@ class Remove_Block(View):
                     ipaddr=IPAddress.objects.get(address=ip)
                     ipaddr.snapshot() 
                     ipaddr.delete()
-                except:
-                    pass
-                messages.success(request, "Cannot connect to gw {}".format(de))
-                return redirect(reverse('plugins:block_iphst:BlockIp'))   
+                except Exception as e:
+                    messages.success(request, e)
+                    return redirect(reverse('plugins:block_iphst:BlockIp'))   
+
         else:
             messages.success(request, 'IP invalid.')
             return redirect(reverse('plugins:block_iphst:BlockIp'))               
