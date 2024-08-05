@@ -77,6 +77,8 @@ class Remove_Block(View):
                     ipaddr=IPAddress.objects.get(address=ip)
                     ipaddr.snapshot() 
                     ipaddr.delete()
+                    messages.success(request, "Da xoa IP {} thanh cong.".format(ipaddr))
+                    return redirect(reverse('plugins:block_iphst:BlockIp'))   
                 except Exception as e:
                     messages.success(request, e)
                     return redirect(reverse('plugins:block_iphst:BlockIp'))   
