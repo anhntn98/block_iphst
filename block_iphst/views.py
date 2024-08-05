@@ -48,7 +48,7 @@ class Add_Block(View):
                                 conf_dev.load(commit_cmd, format='set')
                                 conf_dev.commit(comment='Block IP')
                                 ipadd=str(ip) + "/24"
-                                ipaddr,check=IPAddress.objects.get_or_create(address=ip)
+                                ipaddr,check=IPAddress.objects.get_or_create(address=ipadd)
                                 ipaddr.snapshot()
                                 ipaddr.status="disable"
                                 ipaddr.comments="IP chua duoc dang ky ma da su dung. Block"   
@@ -74,7 +74,7 @@ class Remove_Block(View):
             for de in settings.gw:
                 ipadd=str(ip) + "/24"
                 try:
-                    ipaddr=IPAddress.objects.get(address=ip)
+                    ipaddr=IPAddress.objects.get(address=ipadd)
                     ipaddr.snapshot() 
                     ipaddr.delete()
                     messages.success(request, "Da xoa IP {} thanh cong.".format(ipaddr))
